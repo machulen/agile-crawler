@@ -1,0 +1,42 @@
+$ node index.js 
+Usage:
+
+    node index.js <input_origin_file_path> <input_other_sample_file_path> [-v]
+
+-v makes the output verbose. It should be exactly the third argument.
+$ node index.js examples/sample-0-origin.html examples/sample-0-origin.html
+/html/body/div[1]/div[1]/div[3]/div[1]/div/div[2]/a
+$ node index.js examples/sample-0-origin.html examples/sample-1-evil-gemini.html
+/html/body/div[1]/div[1]/div[3]/div[1]/div/div[2]/a[2]
+$ node index.js examples/sample-0-origin.html examples/sample-2-container-and-clone.html
+/html/body/div[1]/div[1]/div[3]/div[1]/div/div[2]/div/a
+$ node index.js examples/sample-0-origin.html examples/sample-3-the-escape.html
+/html/body/div[1]/div[1]/div[3]/div[1]/div/div[3]/a
+$ node index.js examples/sample-0-origin.html examples/sample-4-the-mash.html
+/html/body/div[1]/div[1]/div[3]/div[1]/div/div[3]/a
+$ node index.js examples/sample-0-origin.html examples/sample-0-origin.html -v
+Good candidates:
+Score: 10, path: /html/body/div[1]/div[1]/div[3]/div[1]/div/div[2]/a, element: <a id="make-everything-ok-button" class="btn btn-success" href="#ok" title="Make-Button" rel="next" onclick="javascript:window.okDone(); return false;"> Make everything OK </a>
+Best choice:
+/html/body/div[1]/div[1]/div[3]/div[1]/div/div[2]/a
+$ node index.js examples/sample-0-origin.html examples/sample-1-evil-gemini.html -v
+Good candidates:
+Score: 4, path: /html/body/div[1]/div[1]/div[3]/div[1]/div/div[2]/a[1], element: <a class="btn btn-danger" href="#ok" title="Make-Button" onclick="javascript:window.close(); return false;"> Break everyone's OK </a>
+Score: 7, path: /html/body/div[1]/div[1]/div[3]/div[1]/div/div[2]/a[2], element: <a class="btn btn-success" href="#check-and-ok" title="Make-Button" rel="done" onclick="javascript:window.okDone(); return false;"> Make everything OK </a>
+Best choice:
+/html/body/div[1]/div[1]/div[3]/div[1]/div/div[2]/a[2]
+$ node index.js examples/sample-0-origin.html examples/sample-2-container-and-clone.html -v
+Good candidates:
+Score: 7, path: /html/body/div[1]/div[1]/div[3]/div[1]/div/div[2]/div/a, element: <a class="btn test-link-ok" href="#ok" title="Make-Button" rel="next" onclick="javascript:window.okComplete(); return false;"> Make everything OK </a>
+Best choice:
+/html/body/div[1]/div[1]/div[3]/div[1]/div/div[2]/div/a
+$ node index.js examples/sample-0-origin.html examples/sample-3-the-escape.html -v
+Good candidates:
+Score: 7, path: /html/body/div[1]/div[1]/div[3]/div[1]/div/div[3]/a, element: <a class="btn btn-success" href="#ok" title="Do-Link" rel="next" onclick="javascript:window.okDone(); return false;"> Do anything perfect </a>
+Best choice:
+/html/body/div[1]/div[1]/div[3]/div[1]/div/div[3]/a
+$ node index.js examples/sample-0-origin.html examples/sample-4-the-mash.html -v
+Good candidates:
+Score: 7, path: /html/body/div[1]/div[1]/div[3]/div[1]/div/div[3]/a, element: <a class="btn btn-success" href="#ok" title="Make-Button" rel="next" onclick="javascript:window.okFinalize(); return false;"> Do all GREAT </a>
+Best choice:
+/html/body/div[1]/div[1]/div[3]/div[1]/div/div[3]/a

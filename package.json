@@ -1,0 +1,17 @@
+{
+  "name": "agile-engine-crawler",
+  "version": "1.0.0",
+  "description": "A smart yet simple XML analyzer",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oleksa Machulenko",
+  "license": "MIT",
+  "dependencies": {
+    "jsdom": "^11.8.0"
+  }
+}
